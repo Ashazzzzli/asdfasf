@@ -25,26 +25,30 @@
             font-size: 4rem; /* Larger font size */
             margin-bottom: 30px;
             text-align: center;
-            text-shadow: 5px 5px 15px black; /* Bigger black glow */
             width: fit-content;
             padding: 20px;
             position: relative;
             z-index: 10;
             line-height: 1.2; /* Adjust line height for better spacing between characters */
-    
-            /* Apply image wrapping to the text */
-            background-image: url('https://soleistore.com/cdn/shop/collections/quinceanera-992223.webp?v=1687311456'); /* New image wrapping paper */
-    
-            /* Adjust background size to prevent stretching and blurriness */
-            background-size: cover; /* Stretch the image to cover the entire text */
-            background-repeat: no-repeat; /* Prevent the image from repeating */
-            background-position: center; /* Center the image */
-    
-            color: transparent; /* Make the text transparent so the image shows through */
-            -webkit-background-clip: text; /* Clip the background to the text */
-            background-clip: text; /* For non-webkit browsers */
+            color: #ed1c24; /* Saturated red for "Happy Birthday Baby" */
+            text-shadow: 5px 5px 15px black; /* Initial black glow */
+            animation: glowEffect 2s infinite; /* Animate the glow effect */
         }
 
+        @keyframes glowEffect {
+            0% {
+                text-shadow: 5px 5px 15px black, 0 0 25px #ed1c24, 0 0 50px #ed1c24;
+                transform: rotate(0deg);
+            }
+            50% {
+                text-shadow: 5px 5px 25px black, 0 0 40px #ed1c24, 0 0 80px #ed1c24;
+                transform: rotate(180deg);
+            }
+            100% {
+                text-shadow: 5px 5px 15px black, 0 0 25px #ed1c24, 0 0 50px #ed1c24;
+                transform: rotate(360deg);
+            }
+        }
 
         #clickable {
             font-size: 1.5rem; /* Larger size for visibility */
@@ -83,6 +87,7 @@
             opacity: 0;
             animation: kissEffect 1.5s forwards;
             color: #ed1c24; /* Saturated red color for the kiss bubble */
+            text-shadow: 2px 2px 8px black; /* Black glow around kiss */
         }
 
         @keyframes kissEffect {
