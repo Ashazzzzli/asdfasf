@@ -56,68 +56,29 @@
             display: inline-block;
         }
 
-        .bubble {
-            position: absolute;
-            font-size: 20px;
-            font-weight: bold;
-            opacity: 0;
-            animation: fadeInOut 2s forwards;
-        }
-
-        @keyframes fadeInOut {
-            0% {
-                opacity: 0;
-            }
-            50% {
-                opacity: 1;
-            }
-            100% {
-                opacity: 0;
-                transform: translateY(-50px);
-            }
-        }
-
-        .kiss {
-            position: absolute;
-            font-size: 25px;
-            font-weight: bold;
-            opacity: 0;
-            animation: kissEffect 1.5s forwards;
-            color: #ed1c24; /* Saturated red color for the kiss bubble */
-            text-shadow: 2px 2px 8px black; /* Black glow around kiss */
-        }
-
-        @keyframes kissEffect {
-            0% {
-                opacity: 0;
-                transform: scale(0.5);
-            }
-            50% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            100% {
-                opacity: 0;
-                transform: scale(0.5) translateY(-50px);
-            }
-        }
-
-        #rectangle-box {
-            position: absolute;
+        #message-box {
+            position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 300px;
-            height: 150px;
-            background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
-            border: 2px solid #ed1c24; /* Red border */
+            background-image: url('https://storageciggallery.addons.business/15706/cig-cozy-gallery-8987bZI-10-26-NATL-Pumpkin-Day-Wallpaper-1500x2000-A-s.png?c=00');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: black;
+            padding: 10px 20px;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            padding: 20px;
-            font-size: 1.2rem;
-            color: #333;
-            text-align: center;
-            line-height: 1.5;
-            z-index: 100;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            text-shadow: 1px 1px orange;
+            display: flex;
+            align-items: center;
+        }
+
+        #message-box::before {
+            content: '\1F514'; /* Bell emoji */
+            margin-right: 10px;
+            font-size: 1.5rem;
         }
     </style>
 </head>
@@ -125,9 +86,7 @@
     <h1>HAPPY BIRTHDAY BABY HEHEHEH</h1>
     <div id="clickable">click here >~<</div>
 
-    <div id="rectangle-box">
-        <p>Surprise! This is your special day. 💖</p>
-    </div>
+    <div id="message-box">You have a message!</div>
 
     <script>
         const clickable = document.getElementById('clickable');
