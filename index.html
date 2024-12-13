@@ -8,7 +8,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-image: url('https://i.pinimg.com/originals/7d/68/a4/7d68a425553c15f0edbddbc163d9c462.jpg'); /* Background Image */
+            background-image: url('https://i.pinimg.com/originals/7d/68/a4/7d68a425553c15f0edbddbc163d9c462.jpg');
             background-size: cover;
             background-position: center center;
             background-repeat: no-repeat;
@@ -22,35 +22,17 @@
         }
 
         h1 {
-            font-size: 4rem; /* Larger font size */
+            font-size: 4rem;
             margin-bottom: 30px;
             text-align: center;
-            width: fit-content;
-            padding: 20px;
-            position: relative;
-            z-index: 10;
-            line-height: 1.2; /* Adjust line height for better spacing between characters */
-            color: #ed1c24; /* Saturated red for "Happy Birthday Baby" */
-            text-shadow: 5px 5px 15px black; /* Initial black glow */
-            animation: glowEffect 2s infinite; /* Animate the glow effect */
-        }
-
-        @keyframes glowEffect {
-            0% {
-                text-shadow: 5px 5px 15px black, 0 0 25px #ed1c24, 0 0 50px #ed1c24;
-            }
-            50% {
-                text-shadow: 10px 10px 30px black, 0 0 40px #ed1c24, 0 0 80px #ed1c24;
-            }
-            100% {
-                text-shadow: 5px 5px 15px black, 0 0 25px #ed1c24, 0 0 50px #ed1c24;
-            }
+            text-shadow: 0 0 20px black, 0 0 30px black;
+            color: #ed1c24;
         }
 
         #clickable {
-            font-size: 1.5rem; /* Larger size for visibility */
-            color: #FF4040; /* Balanced red color */
-            text-shadow: 1px 1px black; /* Black stroke effect */
+            font-size: 1.5rem;
+            color: #FF4040;
+            text-shadow: 1px 1px black;
             cursor: pointer;
             text-align: center;
             display: inline-block;
@@ -83,8 +65,8 @@
             font-weight: bold;
             opacity: 0;
             animation: kissEffect 1.5s forwards;
-            color: #ed1c24; /* Saturated red color for the kiss bubble */
-            text-shadow: 2px 2px 8px black; /* Black glow around kiss */
+            color: #ed1c24;
+            text-shadow: 2px 2px 8px black;
         }
 
         @keyframes kissEffect {
@@ -117,15 +99,16 @@
             font-size: 1rem;
             font-weight: bold;
             text-shadow: 1px 1px orange;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
 
-        #notif {
-            background: red;
+        #notification {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: red;
             color: white;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            font-weight: bold;
             width: 20px;
             height: 20px;
             display: flex;
@@ -139,8 +122,8 @@
     <h1>HAPPY BIRTHDAY BABY HEHEHEH</h1>
     <div id="clickable">click here >~<</div>
     <div id="message-box">
-        <div id="notif">1</div>
         You have a message!
+        <div id="notification">1</div>
     </div>
 
     <script>
@@ -166,16 +149,29 @@
             "I love you"
         ];
 
+        // Show message bubbles automatically
+        function createMessageBubble(text) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.textContent = text;
+            bubble.style.color = '#ed519c';
+            bubble.style.textShadow = '2px 2px black';
+            bubble.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
+            bubble.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
+            document.body.appendChild(bubble);
+            setTimeout(() => bubble.remove(), 2000);
+        }
+
+        function showMessageBubbles() {
+            messages.forEach((message, index) => {
+                setTimeout(() => createMessageBubble(message), index * 1000);
+            });
+        }
+
+        // Generate kiss effect on click
         clickable.addEventListener('click', () => {
-            // Generate at least 4 kiss bubbles per click
             for (let i = 0; i < 4; i++) {
                 createKissBubble();
-            }
-
-            // Generate 4 random messages on click
-            for (let i = 0; i < 4; i++) {
-                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-                createMessageBubble(randomMessage);
             }
         });
 
@@ -189,17 +185,8 @@
             setTimeout(() => kiss.remove(), 1500);
         }
 
-        function createMessageBubble(text) {
-            const bubble = document.createElement('div');
-            bubble.classList.add('bubble');
-            bubble.textContent = text;
-            bubble.style.color = "#ed519c"; // Pink color
-            bubble.style.textShadow = "2px 2px 4px black"; // Black stroke effect
-            bubble.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
-            bubble.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
-            document.body.appendChild(bubble);
-            setTimeout(() => bubble.remove(), 2000);
-        }
+        // Start showing message bubbles when the page loads
+        window.onload = showMessageBubbles;
     </script>
 </body>
 </html>
