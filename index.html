@@ -51,75 +51,25 @@
             }
         }
 
-        #rectangle {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            background-image: url('https://storageciggallery.addons.business/15706/cig-cozy-gallery-8987bZI-10-26-NATL-Pumpkin-Day-Wallpaper-1500x2000-A-s.png?c=00');
-            background-size: cover;
-            background-repeat: no-repeat;
-            color: black;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            font-size: 1rem;
+        .bubble {
+            position: absolute;
+            font-size: 20px;
             font-weight: bold;
-            text-shadow: 1px 1px orange;
+            opacity: 0;
+            animation: fadeInOut 2s forwards;
         }
 
-        #rectangle span {
-            position: relative;
-        }
-
-        #notification-badge {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: red;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 0.8rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-        }
-
-        #modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            height: 60%;
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            overflow: auto;
-        }
-
-        #modal-content {
-            padding: 20px;
-            font-size: 1.2rem;
-            color: black;
-        }
-
-        #close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: red;
-            color: white;
-            border: none;
-            font-size: 1.2rem;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 3px;
+        @keyframes fadeInOut {
+            0% {
+                opacity: 0;
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
         }
 
         #clickable {
@@ -160,24 +110,59 @@
 <body>
     <h1>HAPPY BIRTHDAY BABY HEHEHEH</h1>
     <div id="clickable">click here >~<</div>
-    <div id="rectangle">
-        <span>You have a message!</span>
-        <div id="notification-badge">1</div>
-    </div>
-    <div id="modal">
-        <button id="close-btn">X</button>
-        <div id="modal-content">
-            <p>Happy birthday! I love you so much! Here's a big surprise message just for you. ❤️</p>
-        </div>
-    </div>
 
     <script>
         const clickable = document.getElementById('clickable');
-        const rectangle = document.getElementById('rectangle');
-        const modal = document.getElementById('modal');
-        const closeBtn = document.getElementById('close-btn');
+        const messages = [
+            "I love you so much",
+            "You're 17 now holy crap",
+            "HAPPY 17TH BIRTHDAY",
+            "GOD I LOVE YOU",
+            "You're so perfect",
+            "It's been more than a year since we met omg",
+            "We're getting old",
+            "A year closer to marrying you",
+            "I fucking love you so fucking much",
+            "Marry me",
+            "Kiss me",
+            "You're my everything",
+            "I'm so lucky to have you",
+            "You're the best",
+            "You're so gorgeous",
+            "My baby",
+            "You're so fucking amazing and perfect",
+            "I love you"
+        ];
 
-        // Kiss effect on click
+        // Show message bubbles automatically
+        function showMessageBubbles() {
+            const colors = ["#ed519c", "#000000"]; // Pink and black
+            const strokeColors = ["black", "#ca6d99"]; // Black stroke for pink and pink stroke for black
+
+            for (let i = 0; i < 8; i++) {
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                const randomColor = colors[i % 2]; // Alternate between pink and black
+                const randomStrokeColor = strokeColors[i % 2]; // Alternate between black and pink stroke color
+                createMessageBubble(randomMessage, randomColor, randomStrokeColor);
+            }
+        }
+
+        function createMessageBubble(text, color, strokeColor) {
+            const bubble = document.createElement('div');
+            bubble.classList.add('bubble');
+            bubble.textContent = text;
+            bubble.style.color = color;
+            bubble.style.textShadow = `2px 2px 4px ${strokeColor}`;
+            bubble.style.left = `${Math.random() * (window.innerWidth - 200)}px`;
+            bubble.style.top = `${Math.random() * (window.innerHeight - 100)}px`;
+            document.body.appendChild(bubble);
+            setTimeout(() => bubble.remove(), 2000);
+        }
+
+        // Show messages every 2 seconds
+        setInterval(showMessageBubbles, 2000);
+
+        // Add "kiss" bubbles on click
         clickable.addEventListener('click', () => {
             for (let i = 0; i < 4; i++) {
                 createKissBubble();
@@ -193,16 +178,6 @@
             document.body.appendChild(kiss);
             setTimeout(() => kiss.remove(), 1500);
         }
-
-        // Open modal on rectangle click
-        rectangle.addEventListener('click', () => {
-            modal.style.display = 'block';
-        });
-
-        // Close modal
-        closeBtn.addEventListener('click', () => {
-            modal.style.display = 'none';
-        });
     </script>
 </body>
 </html>
