@@ -101,11 +101,33 @@
                 transform: scale(0.5) translateY(-50px);
             }
         }
+
+        #rectangle-box {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: 300px;
+            height: 150px;
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border: 2px solid #ed1c24; /* Red border */
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            font-size: 1.2rem;
+            color: #333;
+            text-align: center;
+            line-height: 1.5;
+            z-index: 100;
+        }
     </style>
 </head>
 <body>
     <h1>HAPPY BIRTHDAY BABY HEHEHEH</h1>
     <div id="clickable">click here >~<</div>
+
+    <div id="rectangle-box">
+        <p>Surprise! This is your special day. 💖</p>
+    </div>
 
     <script>
         const clickable = document.getElementById('clickable');
